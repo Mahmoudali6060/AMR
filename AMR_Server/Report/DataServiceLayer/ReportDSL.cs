@@ -21,6 +21,7 @@ namespace Reports.DataServiceLayer
         {
             try
             {
+                string reportName = DateTime.Now.ToString("MM_dd_yyyy_hh_mm_ss") + ".pdf";
                 var globalSettings = new GlobalSettings
                 {
                     ColorMode = ColorMode.Color,
@@ -28,7 +29,7 @@ namespace Reports.DataServiceLayer
                     PaperSize = PaperKind.A4,
                     Margins = new MarginSettings { Top = 10 },
                     DocumentTitle = "PDF Report",
-                    Out = Path.Combine(Directory.GetCurrentDirectory(), "PdfReports", "Report.pdf")  //USE THIS PROPERTY TO SAVE PDF TO A PROVIDED LOCATION
+                    Out = Path.Combine(Directory.GetCurrentDirectory(), "PdfReports", reportName)  //USE THIS PROPERTY TO SAVE PDF TO A PROVIDED LOCATION
                 };
 
                 var objectSettings = new ObjectSettings
@@ -37,7 +38,7 @@ namespace Reports.DataServiceLayer
                     HtmlContent = html,
                     //Page = "https://www.facebook.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
                     WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets/css", "styles.css") },
-                    HeaderSettings = { FontName = "Arial", FontSize = 9,  },
+                    HeaderSettings = { FontName = "Arial", FontSize = 9, },
                     FooterSettings = { FontName = "Arial", FontSize = 9, Right = "Page [page] of [toPage]", Line = true }
                 };
 
@@ -54,7 +55,7 @@ namespace Reports.DataServiceLayer
                 //return File(file, "application/pdf", "EmployeeReport.pdf");
                 //return File(file, "application/pdf");
 
-                return "PdfReports/Report.pdf";
+                return "PdfReports/" + reportName;
             }
             catch (Exception ex)
             {

@@ -30,10 +30,16 @@ export class UserListComponent implements OnInit {
 
 	getAllUserDetails() {
 		this.userService.getUserDetails(this.dataSource).subscribe((res) => {
-			this.allUser = res;
+			this.setNewUsers(res);
 		});
 	}
 
+	private setNewUsers(userList: any) {
+		for (let user of userList) {
+			this.allUser.push(user);
+		}
+	}
+	
 	onScroll() {
 		this.dataSource.PageNumber = this.dataSource.PageNumber + 1;
 		this.getAllUserDetails();

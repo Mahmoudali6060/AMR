@@ -55,7 +55,7 @@ namespace Users.DataAccessLayer
                 if (string.IsNullOrEmpty(dataSource.Keyword))
                 {
                     lstUser = _context.UserDetails
-                       .Take(dataSource.PageNumber * dataSource.PageSize).ToList();
+                       .Skip((dataSource.PageNumber -1) * dataSource.PageSize).Take(dataSource.PageSize).ToList();
                 }
                 else
                 {
